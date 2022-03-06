@@ -1,5 +1,4 @@
 from unittest.mock import patch
-
 from common.mocking import mock_make_request
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
@@ -12,7 +11,7 @@ class TestPostApi(APITestCase):
     def client(self):
         return APIClient()
 
-    @patch('userAuth.views.make_request', return_value=mock_make_request)
+    @patch('userAuth.signals.make_request', return_value=mock_make_request)
     def add_default_user(self, mock_make_request_):
         # just making it bulletproof
         user_data = {

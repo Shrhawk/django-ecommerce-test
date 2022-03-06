@@ -12,7 +12,7 @@ class TestUserApi(APITestCase):
     def client(self):
         return APIClient()
 
-    @patch('userAuth.views.make_request', return_value=mock_make_request)
+    @patch('userAuth.signals.make_request', return_value=mock_make_request)
     def add_default_user(self, mock_user_data_=None):
         user_data = {
             'username': 'test_admin',
@@ -69,7 +69,7 @@ class TestUserApi(APITestCase):
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response_data['message'] == 'User Not Registered'
 
-    @patch('userAuth.views.make_request', return_value=mock_make_request)
+    @patch('userAuth.signals.make_request', return_value=mock_make_request)
     def test_get_user_register_api_with_valid_data(self, mock_user_data_):
         """
         Test register api with valid data.

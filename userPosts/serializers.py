@@ -1,7 +1,7 @@
-from django.db import models
 from rest_framework import serializers
-from .models import Post, PostLikes
 from userAuth.serializers import UserModelSerializer
+
+from .models import Post, PostLikes
 
 
 class PostModelSerializer(serializers.ModelSerializer):

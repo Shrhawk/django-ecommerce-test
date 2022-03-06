@@ -120,7 +120,5 @@ class PostLikeViewSet(viewsets.ViewSet):
     @staticmethod
     def post_exists_check(user_data):
         user_data = _mutable(user_data)
-        exists = Post.objects.filter(
-            id=user_data.get('post')
-        )
+        exists = Post.objects.filter(id=user_data.get('post'))
         return True if exists else False

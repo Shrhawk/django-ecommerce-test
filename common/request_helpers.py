@@ -17,8 +17,8 @@ def make_request(method='get', api_url='', data={}, retries=0):
     retry_strategy = Retry(
         total=retries,
         backoff_factor=1,
-        status_forcelist=[429, 500, 502, 503, 504],
-        allowed_methods=frozenset(['GET', 'POST'])
+        status_forcelist=[429, 500, 502, 503, 504]
+        # allowed_methods=frozenset(['GET', 'POST'])
     )
     retry_adapter = HTTPAdapter(max_retries=retry_strategy)
     session = requests.Session()
@@ -28,10 +28,10 @@ def make_request(method='get', api_url='', data={}, retries=0):
     method = method.lower()
 
     try:
-        if method.lower() == 'get':
+        if method == 'get':
             response = session.get(api_url, params=data, headers=headers)
         elif method == 'post':
-            response = session.get(api_url, data=data, headers=headers)
+            response = session.post(api_url, data=data, headers=headers)
     except:
         return {'status_code': 500, 'data': 'internal server error'}
     return {'status_code': response.status_code, 'data': response.json()}
