@@ -1,0 +1,25 @@
+name: 'Run Python Tests'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Python 3.8.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8.8
+      - name: Install dependencies
+        run: |
+          chmod +x ./scripts/install_requirements.sh
+          ./scripts/install_requirements.sh
+        shell: bash
+      - name: Run Application tests
+        run: python manage.py test
